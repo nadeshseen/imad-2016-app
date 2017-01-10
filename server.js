@@ -1,5 +1,5 @@
-var express = require('express');
-var morgan = require('morgan');
+var express = require('express'); //to create web server
+var morgan = require('morgan');     //output logs
 var path = require('path');
 var Pool = require('pg').Pool;
 
@@ -10,11 +10,14 @@ var config = {
     port:'5432',
     password:'db-nadeshseen-84869'
 };
+
 var app = express();
 app.use(morgan('combined'));
+
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
-});
+});    
+
 var pool = new Pool(config);
 app.get('/test-db', function ( req , res ) {
     pool.query('SELECT * FROM test',function(err,result){
@@ -50,6 +53,7 @@ app.get('/articles/:articleName',function(req,res){
 app.get('/ui/style.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style.css'));
 });
+
 app.get('/ui/madi.png', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'madi.png'));
 });
