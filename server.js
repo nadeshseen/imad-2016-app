@@ -32,7 +32,7 @@ app.get('/articles/:articleName',function(req,res){
     //articleName === article.one
     //article[articleName] ==={} content object for article one
     
-    poo.query("SELECT * FROM article WHERE title = "+req.params.articleName,function (err, result){
+    poo.query("SELECT * FROM article WHERE title = '"+req.params.articleName + "'",function (err, result){
         if (err){
             res.status(500).send(err.toString());
             
